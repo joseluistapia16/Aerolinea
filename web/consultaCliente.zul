@@ -1,0 +1,26 @@
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window id="conselprofe" title="Alumnos" border="normal" height="365px" width="505px"
+            apply="com.aerolinea.controlador.vista.ConsultaCliente"
+            position="center,center" closable="true"
+            action="show: slideDown;hide: slideUp">
+        <div align="center">         
+        Cedula:  
+        <textbox id="filtro" maxlength="50" />
+        <button id="buscar" label=" Buscar"/>
+        </div>  
+        <groupbox width="485px" height="310px" >	
+            <listbox id="tabla"  rows="7">
+                <listhead id="cabecera">
+                    <listheader label="Cedula" width="100px" align="center" />
+                    <listheader label="Nombre" align="center"  />
+                              
+                </listhead>        
+            </listbox>
+            <button id="closeBtn" width="90px" hflex="1" label="Cerrar"/> 
+        </groupbox>
+         
+         
+        
+    </window>
+</zk>

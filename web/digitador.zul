@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+index.zul
+
+{{IS_NOTE
+	Purpose:
+		
+	Description:
+		
+	History:
+		Mon Jun 12 21:23:35     2006, Created by tomyeh
+		Fri May 01 04:36:35     2009, Modified by stera
+}}IS_NOTE
+
+Copyright (C) 2006 Potix Corporation. All Rights Reserved.
+
+{{IS_RIGHT
+}}IS_RIGHT
+-->
+<window id="digitador" apply="com.aerolinea.controlador.vista.Digitador">
+<div>
+    <style src="/style.css" />
+    <menubar autodrop="true">
+            <menu label="Clientes">
+                <menupopup>
+                    <menu label="Mantenimiento">
+                        <menupopup>
+                            <menuitem id ="cl_ingreso" label="Ingreso"/>             
+                            <menuitem id ="cl_edicion" label="Edicion o eliminación"/>                                                          
+                        </menupopup>
+                    </menu>                 
+                </menupopup>
+            </menu>
+            <menu label="Reservacion">
+                <menupopup>
+                    <menu label="Mantenimiento">
+                        <menupopup>
+                            <menuitem id ="rs1" label="Ingreso"/>             
+                            <menuitem id ="rs2" label="Edicion o eliminación"/>                                                          
+                        </menupopup>
+                    </menu>                 
+                </menupopup>
+            </menu>
+        </menubar>
+    
+  
+</div>
+</window>

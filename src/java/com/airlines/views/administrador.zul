@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+index.zul
+
+{{IS_NOTE
+	Purpose:
+		
+	Description:
+		
+	History:
+		Mon Jun 12 21:23:35     2006, Created by tomyeh
+		Fri May 01 04:36:35     2009, Modified by stera
+}}IS_NOTE
+
+Copyright (C) 2006 Potix Corporation. All Rights Reserved.
+
+{{IS_RIGHT
+}}IS_RIGHT
+-->
+<div apply="com.cursos.vista.login.Madministrador">
+    <style src="/style.css" />
+    <menubar autodrop="true">
+            <menu label="Cursos">
+                <menupopup>
+                    <menu label="Mantenimiento">
+                        <menupopup>
+                            <menuitem id ="idingcr" label="Ingreso"/>             
+                            <menuitem id ="idedicr" label="Edicion"/>                  
+                     
+                            <menuitem id ="elidicr" label="Eliminar"/>                  
+                        
+                        </menupopup>
+                    </menu>
+                    <menu label="Componentes">
+                        <menupopup>           
+                            <menuitem id ="idci" label="Ciencia"/>                                     
+                            <menuitem id ="idma" label="Materia"/>                  
+                        
+                        </menupopup>
+                    </menu>
+                </menupopup>
+            </menu>
+            <menu label="Estudiantes">
+                <menupopup>
+                  <menu label="Mantenimiento">
+                        <menupopup>
+                            <menuitem id="inalumno" label="Ingreso"/>             
+                            <menuitem id="edalumno" label="Edicion"/>                  
+                     
+                            <menuitem id="elalumno" label="Eliminar"/>                  
+                        
+                        </menupopup>
+                    </menu>
+                </menupopup>
+            </menu>
+            <menu label="Profesores">
+                <menupopup>
+                        <menu label="Mantenimiento">
+                        <menupopup>
+                            <menuitem id="inprofesor" label="Ingreso"/>             
+                            <menuitem id="cnprofesor" label="Edicion"/>                  
+                     
+                            <menuitem id="eliprofesor" label="Eliminar"/>                  
+                        
+                        </menupopup>
+                    </menu>
+                </menupopup>
+            </menu>
+             
+        </menubar>
+    
+  
+</div>

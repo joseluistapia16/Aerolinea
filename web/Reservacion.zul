@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window id="Vreservacion"  title="Reservaciones" border="normal" height="310px" width="630px"
+        apply="com.aerolinea.controlador.vista.Reservacion"
+        position="center,center" closable="false"
+        action="show: slideDown;hide: slideUp">
+        <div align="center"> 
+                <space/>    
+                Tipo de vuelo:  <combobox id="tipo" value="" width="170px"/>
+                <space/>    
+            </div>
+        
+        <div align="center" width="610px" > 
+            <grid >   
+                <columns>
+                    <column width="180px" align="right" />
+                    <column width="180px" align="left" />
+                    <column width="180px" align="left" />
+                </columns>     
+                <rows>
+                    <row>
+                        
+                        <combobox id="rutas" value="" width="170px"  />
+                        
+                        <combobox id="airbus" value="" width="170px"/>
+                        <combobox id="horarios" value="" width="170px"/>               
+                   
+                    </row>
+                    <row>
+                        
+                          
+                        <combobox id="rutasV" value="" width="170px"  />
+                        
+                        <combobox id="airbusV" value="" width="170px"/>
+                        <combobox id="horariosV" value="" width="170px"/>               
+                   
+                    </row>
+                </rows>
+            </grid>  
+        </div>
+        <div>
+            
+           
+            <grid>
+           
+                <rows>
+                    <row>
+                      
+                    
+                    
+                    </row>
+                    <row>
+                        <div> 
+                            Fecha Ida
+                            <datebox id="fec1" cols="12" format="medium" onCreate="self.value = new Date()" />
+                        </div> 
+                        <div> 
+                            Fecha vuelta
+                            <datebox id="fec2" cols="12" format="medium" onCreate="self.value = new Date()" />
+                                
+                        </div> 
+                    
+                    
+                    </row>
+                    <row>
+                        <div> 
+                            Número de pasajeros
+                            <intbox id="npas"  maxlength="2" width="80px"/>
+                        </div> 
+                        <div> 
+                            Tipo Cabina
+                            <combobox id="cabina" value="" width="170px"/>
+                                
+                        </div> 
+                     
+                    </row>
+                    <row>                  
+                        <div align="center"> 
+                            Asientos
+                            <combobox id="asientos" value="" width="80px"/>                                
+                        </div> 
+                        <div align="center"> 
+                           Reservados
+                            <textbox id="asintosR" value="" width="180px"/>                                
+                        </div>                                                      
+                    </row>  
+                    <row>
+                         
+                    </row>
+                    <row>
+                        <div align="center"> 
+                            Pasajeros
+                            <combobox id="pasajeros" value="" width="190px"/> 
+                             <button id="bpasajeros" label=".." />                              
+                        </div> 
+                         <div align="center"> 
+                            Valor a Pagar
+                            <textbox id="pagar" value="" width="190px"/> 
+                                                          
+                        </div> 
+                     
+                    </row>
+                 
+
+                </rows>
+            </grid>
+           
+            <div> 
+              <space/>   
+                <button id="grabar" height="20px" width="40px" hflex="1" label="Grabar"
+                style="align=center;font-size: 14.50px;"/> 
+                  <button id="closeBtn" height="20px" width="40px" hflex="1" label="Eliminar"
+                style="align=center;font-size: 14.50px;"/>
+            </div>
+        </div>
+     
+    </window>
+    
+</zk>

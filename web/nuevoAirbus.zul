@@ -1,0 +1,54 @@
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window id="Nairbus"  title="Nuevo Airbus" border="normal" height="246px" width="305px"
+            apply="com.aerolinea.controlador.vista.NuevoAirbus"
+            position="center,center" closable="false"
+            action="show: slideDown;hide: slideUp">
+        <grid >                      
+            <rows>
+                <row align="center">                     
+                    <combobox id="rutas" autodrop="true" buttonVisible="true" width="250px"  
+                              autocomplete="true" />              
+                </row>
+                 <row align="center">                      
+                    <combobox id="horarios" autodrop="true" buttonVisible="true" width="250px"  
+                              autocomplete="true" />             
+                </row>
+            </rows>
+        </grid> 
+        <grid width="345px">
+            
+            <columns>
+                <column width="130px" />
+                <column  width="210px" />
+                 
+            </columns>
+            <rows >
+                <row>
+                    <label value="Codigo" width="80px"  />                     
+                    <textbox id="codigo" value="" disabled="true"
+                            width="140px"  />       
+                </row>
+                <row>
+                    <label value="Numero" width="80px"  />                     
+                    <intbox id="numero" value="0" maxlength="4"
+                            width="140px"  />       
+                </row>
+                <row>
+                    <label value="Capacidad" width="130px" />
+                    <intbox id="capacidad" value="0" width="140px" maxlength="3"/>  
+                     
+                </row>
+                            
+            </rows>
+        </grid> 
+     
+        <div align="center" > 
+            <space/>       
+            <button id="grabar" width="90px" hflex="1" label="Grabar"/> 
+              
+            <button id="closeBtn" width="110px" hflex="1" label="Cerrar"  />
+          
+        </div>
+    </window>
+</zk>

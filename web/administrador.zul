@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+index.zul
+
+{{IS_NOTE
+	Purpose:
+		
+	Description:
+		
+	History:
+		Mon Jun 12 21:23:35     2006, Created by tomyeh
+		Fri May 01 04:36:35     2009, Modified by stera
+}}IS_NOTE
+
+Copyright (C) 2006 Potix Corporation. All Rights Reserved.
+
+{{IS_RIGHT
+}}IS_RIGHT
+-->
+<window id="administrador" apply="com.aerolinea.controlador.vista.Administrador"
+> 
+<div>
+    <style src="/style.css" />
+    <menubar autodrop="true" >
+            <menu label="Rutas">
+                <menupopup>
+                    <menu label="Mantenimiento">
+                        <menupopup>
+                            <menuitem id ="ruta0" label="Ingreso"/>             
+                            <menuitem id ="ruta1" label="Edicion o Eliminación"/>                                                       
+                        </menupopup>
+                    </menu>
+                </menupopup>
+            </menu>
+            <menu label="Horarios">
+                <menupopup>
+                  <menu label="Mantenimiento">
+                        <menupopup>
+                            <menuitem id="horario1" label="Ingreso"/>             
+                            <menuitem id="horario2" label="Edición o Eliminación"/>                                                          
+                        </menupopup>
+                    </menu>
+                </menupopup>
+            </menu>
+            <menu label="Airbus">
+                <menupopup>
+                        <menu label="Mantenimiento">
+                        <menupopup>
+                            <menuitem id="airbus1" label="Ingreso"/>             
+                            <menuitem id="airbus2" label="Edicion o Eliminación"/>                  
+                        </menupopup>
+                    </menu>
+                </menupopup>
+            </menu>
+              
+        </menubar>
+    
+  
+</div>
+</window>

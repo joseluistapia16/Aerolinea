@@ -1,0 +1,73 @@
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+   <window id="Ecliente"  title="Usuario Lan" border="normal" height="376px" width="520px"
+            apply="com.aerolinea.controlador.vista.EditarCliente"
+            position="center,center" closable="false"
+            action="show: slideDown;hide: slideUp">
+        <div align="center">
+            <label  value="Cedula"  style="
+        font-size: 15px; font-style: Calibri;  80px;" />    
+           
+        </div>
+        
+        <div align="center" width="500px"> 
+            <grid >   
+                <columns>
+                    <column width="230px" align="right" />
+                    <column width="100px" align="left" />
+                </columns>     
+                <rows>
+                    <row>
+                        <textbox id="cedula" value="" width="180px"/>
+                        <button id="buscar" width="20px" hflex="1" label="Buscar"/>               
+            </row>
+            </rows>
+            </grid>  
+        </div>
+        <div>
+            <space/>
+            <grid>
+           
+                <rows>
+                    <row>
+                        <label value="Nombres" width="180px" />
+                       
+                            <textbox id="nombre" value=""
+                                 width="239px"  />
+                    
+                    
+                    </row>
+                    <row>
+                        <label value="Apellidos" width="180px" />
+                        <textbox id="apellido" value="" width="239px"/>  
+                     
+                    </row>
+                    <row>                  
+                        <label value="Direccion" width="180px" />
+                        <textbox id="direccion" value=""  width="239px"/>                                                       
+                    </row>  
+                    <row>
+                        <label value="Telefono" width="180px" />
+                        <textbox id="telefono" value=""  width="239px"/>  
+                    </row>
+                    <row>
+                        <label value="Correo Electronico" width="180px" />
+                        <textbox id="correo" value=""  width="239px"/>  
+                     
+                    </row>
+                 
+
+                </rows>
+            </grid>
+            <space/>
+            <div> 
+                <button id="grabar" height="40px" width="90px" hflex="1" label="Grabar"
+                style="align=center;font-size: 17.50px;"/> 
+                  <button id="eliminar" height="40px" width="90px" hflex="1" label="Eliminar"
+                style="align=center;font-size: 17.50px;"/>
+                <button id="closeBtn" height="40px" width="90px" hflex="1" label="Cerrar"
+                style="align=center;font-size: 17.50px;"/> 
+            </div>
+        </div>
+    </window>
+</zk>

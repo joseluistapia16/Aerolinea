@@ -1,0 +1,25 @@
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window id="consuAirbus" title="Horarios" border="normal" height="365px" width="821px"
+            apply="com.aerolinea.controlador.vista.ConsultaAirbus"
+            position="center,center" closable="true"
+            action="show: slideDown;hide: slideUp">
+        <div align="center"> 
+            Número Airbus
+            <textbox id="numeroruta"   maxlength="5" />
+            <button id="buscar" label=" Buscar"/> 
+            <groupbox width="800px" height="310px" >	
+                <listbox id="tabla"  rows="7">
+                    <listhead id="cabecera">             
+                        <listheader label="Airbus" align="center" width="80px" />
+                        <listheader label="Capacidad" align="center" width="120px" /> 
+                        <listheader label="Ruta" align="center" width="190px" /> 
+                        <listheader label="Partida" align="center" width="120px" /> 
+                        <listheader label="Destino" align="center" width="120px" />                        
+                    </listhead>        
+                </listbox>
+                <button id="closeBtn" width="90px" hflex="1" label="Cerrar"/> 
+            </groupbox>  
+        </div>  
+    </window>
+</zk>

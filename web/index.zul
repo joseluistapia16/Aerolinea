@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+index.zul
+
+{{IS_NOTE
+	Purpose:
+		
+	Description:
+		
+	History:
+		Mon Jun 12 21:23:35     2006, Created by tomyeh
+		Fri May 01 04:36:35     2009, Modified by stera
+}}IS_NOTE
+
+Copyright (C) 2006 Potix Corporation. All Rights Reserved.
+
+{{IS_RIGHT
+}}IS_RIGHT
+-->
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="com.aerolinea.controlador.vista.VistaLogin">        
+        <div id="cuadro1" width="1600px"
+             height="90px" style="background-color: #222273;
+        font-family: Times New Roman, Times, serif;" >
+            <space height="10px"/>
+            <div>
+                <label  value="Lan Airlines"  style="color: #FFFF66;
+        font-style: italic;font-size: 30px;   margin-left: 50px;" />   
+            </div> 
+        </div> 
+        <space height="30px"/> 
+        <div align="left"  >             
+            <button id="registro" label="Registrarse" width="130px"   height="40px" style="align=center; 
+    color: #008000;background-color: #008000; margin-left:1200px;  display: inline-block;font-size: 17.50px;
+    zoom: 2;    *display: inline;vertical-align: baseline;cursor: pointer;"/>        
+        </div>
+        <space height="40px"/>
+        <div   width="450px" height="240px" style="align=center; background-color: #000040     ; 
+           margin-left: 405px; " >   
+            <space/>
+            <div align="center">
+            
+                <label  value="Ingreso de usuarios"  style="color: #FFFFFF;
+                            font-size: 22px; font-style: normal;" /> 
+              
+            </div>
+            <space width ="40px"/>
+            <div align="canter">
+              
+                <label  value="Usuario : "  style="color: #FFFFFF;
+                            font-size: 17.50px; font-style: Calibri; margin-left: 80px;" /> 
+                <textbox  width="215px"  height="30px" id="usuario" style="color: #FFFF66;background-color: #002E8A;
+                            font-size: 17.50px; font-style: normal; margin-left: 30px; 
+                             
+                  "  />
+              
+            </div>
+            
+            <space width ="40px"/>
+            <div align="canter">
+              
+                <label  value="Contraseña : "  style="color: #FFFFFF;
+                            font-size: 17.50px; font-style: normal; margin-left: 50px;" /> 
+                <textbox  width="215px" id="clave" type="password" style="color: #FFFF66;background-color:#002E8A;
+                            font-size: 17.50px; font-family: Verdana; margin-left: 30px;"  />
+              
+            </div>
+            <space/>
+            <div align="canter">
+              
+                <button id="login" label="Ingresar" style=" background-color:#52CCCC; display: inline-block;
+    zoom: 2;*display: inline; vertical-align: baseline;
+    cursor: pointer;    text-decoration: none;font: 12px Arial;   padding: .5em 2em .55em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3); -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);margin-left: 180px;"/>          
+            </div>           
+        </div> 
+        <space/>
+        <div align="center"> 
+            <label id="mensaje" value=""  style="color: #000000; font-size: 15px;
+            font-style: normal; margin-right: 50px;" />    
+        </div>
+        <space/>   
+    </window>
+</zk>

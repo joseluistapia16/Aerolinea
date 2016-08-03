@@ -1,0 +1,40 @@
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window id="EDhorario"  title="Horarios : Lunes a Domingo" border="normal" height="200px" width="520px"
+           apply="com.aerolinea.controlador.vista.EditarHorario"
+           position="center,center" closable="false"
+           action="show: slideDown;hide: slideUp">       
+        <div   > 
+            <grid >   
+                    
+                <rows>
+                    <row align="center">
+                        
+                        <combobox id="rutas" autodrop="true" buttonVisible="true" width="250px"  
+                        autocomplete="true" />             
+                    </row>
+                </rows>
+            </grid>  
+        </div>
+         <space/>
+        <div align="center">
+           
+                        <label value="Hora" width="180px"  />
+                    <intbox id="hora" value="0" height="30px" maxlength="2"
+                                     width="45px"  /> :
+                    <intbox id="minuto" value="0" height="30px" maxlength="2"
+                                     width="45px"  /> minutos
+ 
+          </div>
+             <space/>
+            <div> 
+               
+                <button id="grabar" height="30px" width="30px" hflex="1" label="Grabar"
+                        style="align=center;font-size: 17.50px;"/> 
+                <button id="eliminar" width="110px" hflex="1" label="Eliminar"  /> 
+                <button id="closeBtn" height="30px" width="30px" hflex="1" label="Cerrar"
+                        style="align=center;font-size: 17.50px;"/> 
+            </div>
+        
+    </window>
+</zk>
