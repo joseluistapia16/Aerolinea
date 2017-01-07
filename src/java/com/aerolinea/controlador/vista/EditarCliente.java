@@ -5,23 +5,18 @@
  */
 package com.aerolinea.controlador.vista;
 
-import com.aerolinea.componentes.Fecha;
-import com.aerolinea.componentes.Generacion;
 import com.aerolinea.componentes.Validacion;
 import com.aerolinea.dao.Base;
 import com.aerolinea.dao.Consultas;
 import com.aerolinea.dominio.Usuario;
-import java.math.BigInteger;
-import java.sql.Date;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
+
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -41,15 +36,10 @@ public class EditarCliente extends GenericForwardComposer {
     int rep = 0;
     Integer op = 0;
     String mensaje = "";
-    ArrayList<Usuario> lista = consu.filtrarClientes("lan_airlines", cedula.getText(), 2);
+    //  ArrayList<Usuario> lista = consu.filtrarClientes("lan_airlines", cedula.getText(), 1);
     ArrayList<String> validar = new ArrayList<String>();
     //////////////////////
-    Usuario objeto;
-
-    public void onCreate$Ecliente() {
-        
-        init();
-    }
+    Usuario objeto = null;
 
     public void init() {
         Iterator it = arg.keySet().iterator();
@@ -58,6 +48,7 @@ public class EditarCliente extends GenericForwardComposer {
             objeto = (Usuario) arg.get(key);
             dialog = (Window) arg.get("PARENT_WINDOW");
             cedula.setValue(objeto.getCedula());
+            System.out.println(" uauario biggo " + objeto.getNombreusuario());
             nombre.setValue(objeto.getNombreusuario());
             apellido.setValue(objeto.getApellido());
             direccion.setValue(objeto.getDireccion());
@@ -67,6 +58,11 @@ public class EditarCliente extends GenericForwardComposer {
             buscar.setDisabled(true);
         }
 
+    }
+
+    public void onCreate$Ecliente() {
+
+        init();
     }
 
     public void onChange$nombre() {
@@ -162,11 +158,18 @@ public class EditarCliente extends GenericForwardComposer {
 
     }
 
-    public void update(String cedulas) {
+    public void update(String cedulas)  {
         try {
             Usuario objeto = new Usuario("USUARIO_EXTERNO", nombre.getText(),
                     apellido.getText(), telefono.getText(), direccion.getText(), correo.getText());
-            dao.actualizarUsuarios("lan_airlines", objeto, cedula.getText());
+            int res = dao.actualizarUsuarios("lan_airlines", objeto, cedula.getText());
+//         System.out.println(cedula.getText()+" Bandera "+res+" "+nombre.getText()+" "+
+//                    apellido.getText()+" "+ telefono.getText()+" "+ direccion.getText()+" "+ correo.getText() );
+            if (res != 1) {
+                Messagebox.show("No se aceptan ningún valor Nulo!!  ");
+            } else {
+                Messagebox.show("Datos Guardados!!  ");
+            }
         } catch (Exception ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }

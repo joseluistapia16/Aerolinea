@@ -1,6 +1,7 @@
 package com.aerolinea.dao;
 
 import com.aerolinea.dominio.Airbus;
+import com.aerolinea.dominio.Clase;
 import com.aerolinea.dominio.Horario;
 import com.aerolinea.dominio.Ruta;
 import com.aerolinea.dominio.Usuario;
@@ -67,6 +68,38 @@ public class Consultas {
         }
         return lista;
     }
+
+    public ArrayList<Clase> listarClases(String base) {
+        ArrayList<Clase> lista = new ArrayList<Clase>();
+        try {
+            connMY = con.Conexion(base);
+            connMY.setAutoCommit(false);
+            CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
+                    "{ call listarClases() }");
+            prcProcedimientoAlmacenado.execute();
+            rs = prcProcedimientoAlmacenado.getResultSet();
+            while (rs.next()) {
+                Clase objeto = new Clase(
+                        rs.getLong("id_clase"), rs.getString("nombre"), rs.getDouble("valor"));
+                lista.add(objeto);
+            }
+            connMY.commit();
+        } catch (Exception e) {
+            try {
+                connMY.rollback();
+                e.printStackTrace();
+            } catch (SQLException ex) {
+                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                connMY.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
 /// filtrar 
 
     public ArrayList<Usuario> filtrarUsuarios(String base, String usuario, String clave) {
@@ -83,7 +116,7 @@ public class Consultas {
             while (rs.next()) {
                 Usuario objeto = new Usuario(
                         BigInteger.valueOf(rs.getLong("id_usuario")),
-                        rs.getString("nombre_rol"), rs.getString("cedula"), rs.getString("nombre_usuario"),
+                        rs.getString("nombre_rol"), rs.getString("cedula"), rs.getString("nombre"),
                         rs.getString("apellido"), rs.getString("telefono"), rs.getString("direccion"), rs.getString("correo"),
                         rs.getString("fechas"), rs.getString("usuario"), rs.getString("clave"),
                         rs.getDate("fecha"));
@@ -115,13 +148,13 @@ public class Consultas {
             CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
                     "{ call filtroClientes(?,?) }");
             prcProcedimientoAlmacenado.setString(1, Cedula);
-             prcProcedimientoAlmacenado.setInt(2 ,num);
+            prcProcedimientoAlmacenado.setInt(2, num);
             prcProcedimientoAlmacenado.execute();
             rs = prcProcedimientoAlmacenado.getResultSet();
             while (rs.next()) {
                 Usuario objeto = new Usuario(
                         BigInteger.valueOf(rs.getLong("id_usuario")),
-                        rs.getString("nombre_rol"), rs.getString("cedula"), rs.getString("nombre_usuario"),
+                        rs.getString("nombre_rol"), rs.getString("cedula"), rs.getString("nombre"),
                         rs.getString("apellido"), rs.getString("telefono"), rs.getString("direccion"), rs.getString("correo"),
                         rs.getString("fechas"), rs.getString("usuario"), rs.getString("clave"),
                         rs.getDate("fecha"));
@@ -144,7 +177,7 @@ public class Consultas {
         }
         return lista;
     }
-    
+
     // Flitrar Rutas
     public ArrayList<Ruta> filtrarRutas(String base, String partida, String destino) {
         ArrayList<Ruta> lista = new ArrayList<Ruta>();
@@ -159,7 +192,7 @@ public class Consultas {
             rs = prcProcedimientoAlmacenado.getResultSet();
             while (rs.next()) {
                 Ruta objeto = new Ruta(
-                         rs.getLong("id_ruta"),
+                        rs.getLong("id_ruta"),
                         rs.getString("ruta"), rs.getString("partida"), rs.getString("destino"),
                         rs.getDouble("duracion"), rs.getString("codigo"));
                 lista.add(objeto);
@@ -197,7 +230,7 @@ public class Consultas {
             rs = prcProcedimientoAlmacenado.getResultSet();
             while (rs.next()) {
                 Ruta objeto = new Ruta(
-                         rs.getLong("id_ruta"),
+                        rs.getLong("id_ruta"),
                         rs.getString("ruta"), rs.getString("partida"), rs.getString("destino"),
                         rs.getDouble("duracion"), rs.getString("codigo"));
                 lista.add(objeto);
@@ -220,13 +253,16 @@ public class Consultas {
         return lista;
     }
 
-    public ArrayList<Ruta> listarRutas(String base) {
+    public ArrayList<Ruta> listarRutas(String base, int tipo, String partida, String destino) {
         ArrayList<Ruta> lista = new ArrayList<Ruta>();
         try {
             connMY = con.Conexion(base);
             connMY.setAutoCommit(false);
             CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
-                    "{ call listarRutas() }");
+                    "{ call listarRutas(?,?,?) }");
+            prcProcedimientoAlmacenado.setInt(1, tipo);
+            prcProcedimientoAlmacenado.setString(2, partida);
+            prcProcedimientoAlmacenado.setString(3, destino);
             prcProcedimientoAlmacenado.execute();
             rs = prcProcedimientoAlmacenado.getResultSet();
             while (rs.next()) {
@@ -263,11 +299,11 @@ public class Consultas {
             rs = st.executeQuery(query);
             while (rs.next()) {
                 Usuario objeto = new Usuario(
-                        BigInteger.valueOf(rs.getLong("id_usuario")),rs.getString("nombre_rol"),
-                        rs.getString("cedula"),rs.getString("nombre_usuario"),
+                        BigInteger.valueOf(rs.getLong("id_usuario")), rs.getString("nombre_rol"),
+                        rs.getString("cedula"), rs.getString("nombre"),
                         rs.getString("apellido"),
-                        rs.getString("telefono"), rs.getString("direccion"), 
-                        rs.getString("correo"),rs.getString("fechas"), rs.getString("usuario"),
+                        rs.getString("telefono"), rs.getString("direccion"),
+                        rs.getString("correo"), rs.getString("fechas"), rs.getString("usuario"),
                         rs.getString("clave"),
                         rs.getDate("fecha"));
                 lista.add(objeto);
@@ -317,22 +353,23 @@ public class Consultas {
     }
 //************
 
-    public ArrayList<FiltroHorarioRuta> filtrarHorarioRuta(String base, String salida, String destino) {
+    public ArrayList<FiltroHorarioRuta> filtrarHorarioRuta(String base, int op, String salida, String destino) {
         ArrayList<FiltroHorarioRuta> lista = new ArrayList<FiltroHorarioRuta>();
         try {
             connMY = con.Conexion(base);
             connMY.setAutoCommit(false);
             CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
-                    "{ call filtroHorario1P(?,?) }");
-            prcProcedimientoAlmacenado.setString(1, salida);
-            prcProcedimientoAlmacenado.setString(2, destino);
+                    "{ call filtroHorarioRuta(?,?,?) }");
+            prcProcedimientoAlmacenado.setInt(1, op);
+            prcProcedimientoAlmacenado.setString(2, salida);
+            prcProcedimientoAlmacenado.setString(3, destino);
             prcProcedimientoAlmacenado.execute();
             rs = prcProcedimientoAlmacenado.getResultSet();
             while (rs.next()) {
                 FiltroHorarioRuta objeto1 = new FiltroHorarioRuta(
-                        rs.getLong("id_ruta"), Long.valueOf(rs.getInt("id_horario")),
+                        rs.getLong("id_ruta"), Long.valueOf(rs.getInt("id_horarios")),
                         rs.getString("ruta"), rs.getString("partida"), rs.getString("destino"),
-                        rs.getTime("hora"));
+                        rs.getTime("horario"));
 
                 lista.add(objeto1);
             }
@@ -355,56 +392,55 @@ public class Consultas {
     }
 
     //*****
-    public ArrayList<FiltroHorarioRuta> filtrarHorarioRuta(String base) {
-        ArrayList<FiltroHorarioRuta> lista = new ArrayList<FiltroHorarioRuta>();
-        try {
-            connMY = con.Conexion(base);
-            connMY.setAutoCommit(false);
-            CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
-                    "{ call filtroHorarioRuta() }");
-            prcProcedimientoAlmacenado.execute();
-            rs = prcProcedimientoAlmacenado.getResultSet();
-            while (rs.next()) {
-                FiltroHorarioRuta objeto1 = new FiltroHorarioRuta(
-                        rs.getLong("id_ruta"), Long.valueOf(rs.getInt("id_horario")),
-                        rs.getString("ruta"), rs.getString("partida"), rs.getString("destino"),
-                        rs.getTime("hora"));
-
-                lista.add(objeto1);
-            }
-            connMY.commit();
-        } catch (Exception e) {
-            try {
-                connMY.rollback();
-                e.printStackTrace();
-            } catch (SQLException ex) {
-                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } finally {
-            try {
-                connMY.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return lista;
-    }
-
+//    public ArrayList<FiltroHorarioRuta> filtrarHorarioRuta(String base) {
+//        ArrayList<FiltroHorarioRuta> lista = new ArrayList<FiltroHorarioRuta>();
+//        try {
+//            connMY = con.Conexion(base);
+//            connMY.setAutoCommit(false);
+//            CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
+//                    "{ call filtroHorarioRuta() }");
+//            prcProcedimientoAlmacenado.execute();
+//            rs = prcProcedimientoAlmacenado.getResultSet();
+//            while (rs.next()) {
+//                FiltroHorarioRuta objeto1 = new FiltroHorarioRuta(
+//                        rs.getLong("id_ruta"), Long.valueOf(rs.getInt("id_horario")),
+//                        rs.getString("ruta"), rs.getString("partida"), rs.getString("destino"),
+//                        rs.getTime("hora"));
+//
+//                lista.add(objeto1);
+//            }
+//            connMY.commit();
+//        } catch (Exception e) {
+//            try {
+//                connMY.rollback();
+//                e.printStackTrace();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } finally {
+//            try {
+//                connMY.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        return lista;
+//    }
     public ArrayList<FiltroHorarioRuta> filtrarHorarioXRuta(String base, Long id_ruta) {
         ArrayList<FiltroHorarioRuta> lista = new ArrayList<FiltroHorarioRuta>();
         try {
             connMY = con.Conexion(base);
             connMY.setAutoCommit(false);
             CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
-                    "{ call filtroHorarioXRuta(?) }");
+                    "{ call listarHorarioIdRuta(?) }");
             prcProcedimientoAlmacenado.setLong(1, id_ruta);
             prcProcedimientoAlmacenado.execute();
             rs = prcProcedimientoAlmacenado.getResultSet();
             while (rs.next()) {
                 FiltroHorarioRuta objeto1 = new FiltroHorarioRuta(
-                        rs.getLong("id_ruta"), Long.valueOf(rs.getInt("id_horario")),
+                        rs.getLong("id_ruta"), Long.valueOf(rs.getInt("id_horarios")),
                         rs.getString("ruta"), rs.getString("partida"), rs.getString("destino"),
-                        rs.getTime("hora"));
+                        rs.getTime("horario"));
 
                 lista.add(objeto1);
             }
@@ -427,7 +463,7 @@ public class Consultas {
     }
 /// airbus
 
-    public ArrayList<Airbus> listarAirbus(String base, Long id_airbus,Long id_ruta, Integer numero, Integer valor) {
+    public ArrayList<Airbus> listarAirbus(String base, Long id_airbus, Long id_ruta, Integer numero, Integer valor) {
         ArrayList<Airbus> lista = new ArrayList<Airbus>();
         try {
             connMY = con.Conexion(base);
@@ -448,8 +484,8 @@ public class Consultas {
                         rs.getInt("capacidad"),
                         rs.getLong("id_ruta")
                 );
-       System.out.println(" vemos "+rs.getInt("numero_airbus")+" "+rs.getLong("id_ruta")+" "+
-               rs.getString("codigo"));
+                System.out.println(" vemos " + rs.getInt("numero_airbus") + " " + rs.getLong("id_ruta") + " "
+                        + rs.getString("codigo"));
                 lista.add(objeto1);
             }
             connMY.commit();

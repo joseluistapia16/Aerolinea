@@ -59,13 +59,14 @@ public class ConsultaAirbus extends GenericForwardComposer {
                 Window window = 
                 (Window) Executions.createComponents("/editarAirbus.zul", null, parametro);
                 window.doModal();
+              consuAirbus.detach();
             // En este código cuando se abre un listado de registros
             // al dar un click, por ejemplo se elije un Airbus para su edición    
             }
         } catch (Exception e) {
 
         }
-
+         
     }
 
     public void onClick$buscar() {

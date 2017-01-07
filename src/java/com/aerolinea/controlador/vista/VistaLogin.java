@@ -33,7 +33,7 @@ public class VistaLogin extends GenericForwardComposer {
     public void onClick$registro() {
         try {
             Window window = (Window) Executions.createComponents(
-                    "/Registro.zul", null, null);
+                    "/registro/registro.zul", null, null);
             window.doModal();
         } catch (Exception eu) {
 
@@ -48,15 +48,17 @@ public class VistaLogin extends GenericForwardComposer {
                 Archivo.crearArchivo("administrador",
                         lista.get(0).getNombrerol() + ": "
                         + lista.get(0).getNombreusuario() + " " + lista.get(0).getApellido());
-             login.setHref("/administrador.zul"); // cuando se traslada a un pagina
+               Executions.sendRedirect("/administrador.zul"); // cuando se traslada a un pagina
             }      
-             if ("DIGITADOR".equals(lista.get(0).getNombrerol())) {                
-                Archivo.crearArchivo("administrador",
+
+             System.out.println(" Esto es ya! "+lista.get(0).getNombrerol()+" "+lista.get(0).getCedula());
+              if ("USUARIO_EXTERNO".equals(lista.get(0).getNombrerol())) {                
+                Archivo.crearArchivo("usuario",
                         lista.get(0).getNombrerol() + ": "
                         + lista.get(0).getNombreusuario() + " " + lista.get(0).getApellido());
-               login.setHref("/digitador.zul"); // cuando se traslada a un pagina
+                 Archivo.crearArchivo("UsuarioEC",lista.get(0).getCedula());
+                  Executions.sendRedirect("/usuario/usuario.zul"); // cuando se traslada a un pagina
             }
-
         } else {
             // recordF();
             mensaje.setValue("Usuario o clave Incorrecta");

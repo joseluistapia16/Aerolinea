@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -34,18 +35,19 @@ public class Registro extends GenericForwardComposer {
     Consultas consu = new Consultas();
     Base dao = new Base();
     Textbox cedula, nombre, apellido, telefono, direccion, correo;
-    Window registroN;
+    Window registro;
     Button closeBtn, grabar, buscar;
+    Label usuario1,password1;
     String codigo = "";
     int rep = 0;
     Integer op = 0;
     String mensaje = "";
-    ArrayList<Usuario> lista = consu.ConsultaUsuario("lan_airlines", "select * from usuarios  order by nombre_usuario");
+    ArrayList<Usuario> lista = consu.ConsultaUsuario("lan_airlines", "select * from usuario  order by nombre");
     ArrayList<String> validar = new ArrayList<String>();
     //////////////////////
     Map<String, Integer> parametro = new HashMap<String, Integer>();
 
-    public void onCreate$registroN() {
+    public void onCreate$registro() {
         inHabilitar(true);
     }
 
@@ -72,7 +74,7 @@ public class Registro extends GenericForwardComposer {
             mensaje = mensaje + " Cedula ";
             conta++;
         } else {
-            if (consu.ConsultaUsuario("lan_airlines", "select * from usuarios WHERE  cedula='"
+            if (consu.ConsultaUsuario("lan_airlines", "select * from usuario WHERE  cedula='"
                     + cedula.getText() + "'").size() > 0) {
                 mensaje = mensaje + " Cedula Ya Existe ";
                 conta++;
@@ -117,7 +119,7 @@ public class Registro extends GenericForwardComposer {
 
     public void ValidarCedula() {
         if (Validacion.Cedula(cedula.getText()) == true) {
-            if (consu.ConsultaUsuario("lan_airlines", "select * from usuarios where cedula='"
+            if (consu.ConsultaUsuario("lan_airlines", "select * from usuario where cedula='"
                     + cedula.getText() + "'").size() > 0) {
                 Messagebox.show(cedula.getText() + " ! ! " + "\n" + " Ya Existe");
                 inHabilitar(true);
@@ -142,7 +144,7 @@ public class Registro extends GenericForwardComposer {
 
     //////////////////////
     public void onClick$closeBtn() {
-        registroN.detach();
+        registro.detach();
 //        if (rep == 0 && validarCampos() > 0) {
 //            nprofesor.detach();
 //        }
@@ -192,7 +194,7 @@ public class Registro extends GenericForwardComposer {
 
     public void record(String cadena) {
         try {
-            ArrayList<Usuario> lista2 = consu.ConsultaUsuario("lan_airlines", "SELECT * from usuarios");
+            ArrayList<Usuario> lista2 = consu.ConsultaUsuario("lan_airlines", "SELECT * from usuario");
             int pos = lista2.size();
           //  System.out.println(" hey " + pos);
             String usuario = Generacion.generaUsuario(nombre.getText(), apellido.getText()) + pos;
@@ -200,7 +202,12 @@ public class Registro extends GenericForwardComposer {
                     apellido.getText(), telefono.getText(), direccion.getText(), correo.getText(),
                     Fecha.Fecha(), usuario, usuario + cedula.getText(), Date.valueOf(Fecha.FechaSql()));
             //System.out.println(objeto.getFecha());
-            dao.insertarUsuarios("lan_airlines", objeto);
+           dao.insertarUsuarios("lan_airlines", objeto);
+           usuario1.setValue(usuario1.getValue()+usuario);
+           password1.setValue(password1.getValue()+(usuario + cedula.getText()));
+////           if(po1==0){
+////               
+////           }
             lista2.clear();
         } catch (Exception ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);

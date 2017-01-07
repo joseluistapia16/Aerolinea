@@ -26,16 +26,18 @@ import java.util.logging.Logger;
  * @author JOSE LUIS
  */
 public class Base {
+
     Connection connMY = null;
     Conectar con = new Conectar();
-    ResultSet rs;   
-     public int eliminarClientes(String base, String cedula) {
+    ResultSet rs;
+
+    public int eliminarClientes(String base, String cedula) {
         int bandera = 0;
         try {
             connMY = con.Conexion(base);
             connMY.setAutoCommit(false);
             CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
-                    "{ call eliminarRuta(?,?) }");
+                    "{ call eliminarUsuario(?,?) }");
             prcProcedimientoAlmacenado.setString(1, cedula);
             prcProcedimientoAlmacenado.setInt(2, 0);
             prcProcedimientoAlmacenado.registerOutParameter("bandera", Types.INTEGER);
@@ -94,29 +96,31 @@ public class Base {
         }
     }
 
-    public void actualizarUsuarios(String base, Usuario usuario, String clave) {
+    public int actualizarUsuarios(String base, Usuario usuario, String clave) {
+        int bandera=0;
         try {
             connMY = con.Conexion(base);
             connMY.setAutoCommit(true);
             CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
-                    "{ call ActualizarUsuario(?,?,?,?,?,?,?) }");
-            prcProcedimientoAlmacenado.setString(1, usuario.getNombrerol());
+                    "{ call actualizarUsuario(?,?,?,?,?,?,?) }");
+            prcProcedimientoAlmacenado.setString(1, clave);
             prcProcedimientoAlmacenado.setString(2, usuario.getNombreusuario());
             prcProcedimientoAlmacenado.setString(3, usuario.getApellido());
             prcProcedimientoAlmacenado.setString(4, usuario.getTelefono());
             prcProcedimientoAlmacenado.setString(5, usuario.getDireccion());
             prcProcedimientoAlmacenado.setString(6, usuario.getCorreo());
-            prcProcedimientoAlmacenado.setString(7, clave);
-            prcProcedimientoAlmacenado.executeUpdate();
-
+            prcProcedimientoAlmacenado.setInt(7, 0);
+            prcProcedimientoAlmacenado.registerOutParameter("bandera", Types.INTEGER);
+            prcProcedimientoAlmacenado.execute();
+            bandera = prcProcedimientoAlmacenado.getInt("bandera");
             connMY.commit();
         } catch (Exception e) {
-            try {
-                connMY.rollback();
-                e.printStackTrace();
-            } catch (SQLException ex) {
-                Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//               // connMY.rollback();
+//                e.printStackTrace();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         } finally {
             try {
                 connMY.close();
@@ -124,6 +128,7 @@ public class Base {
                 Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return bandera;
     }
 
     public int insertarRutas(String base, Ruta ruta) {
@@ -203,7 +208,7 @@ public class Base {
             connMY.setAutoCommit(false);
             CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
                     "{ call eliminarRuta(?,?) }");
-            prcProcedimientoAlmacenado.setString(1, ruta.getCodigo());
+            prcProcedimientoAlmacenado.setLong(1, ruta.getId_ruta());
             prcProcedimientoAlmacenado.setInt(2, 0);
             prcProcedimientoAlmacenado.registerOutParameter("bandera", Types.INTEGER);
             prcProcedimientoAlmacenado.execute();
@@ -227,7 +232,6 @@ public class Base {
     }
 
     //***********************
-
     public int insertarHorario(String base, Horario horario) {
         int bandera = 0;
         try {
@@ -293,14 +297,15 @@ public class Base {
         }
         return bandera;
     }
-public int eliminarHorario(String base, FiltroHorarioRuta objeto) {
+
+    public int eliminarHorario(String base, FiltroHorarioRuta objeto) {
         int bandera = 0;
         try {
             connMY = con.Conexion(base);
             connMY.setAutoCommit(false);
             CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
                     "{ call eliminarHorario(?,?) }");
-            prcProcedimientoAlmacenado.setLong(1,objeto.getId_horario() );
+            prcProcedimientoAlmacenado.setLong(1, objeto.getId_horario());
             prcProcedimientoAlmacenado.setInt(2, 0);
             prcProcedimientoAlmacenado.registerOutParameter("bandera", Types.INTEGER);
             prcProcedimientoAlmacenado.execute();
@@ -323,7 +328,8 @@ public int eliminarHorario(String base, FiltroHorarioRuta objeto) {
         return bandera;
     }
 //***Airbus
-public int insertarAirbus(String base, Airbus airbus) {
+
+    public int insertarAirbus(String base, Airbus airbus) {
         int bandera = 0;
         try {
             connMY = con.Conexion(base);
@@ -357,7 +363,7 @@ public int insertarAirbus(String base, Airbus airbus) {
         return bandera;
     }
 
-public int actualizarAirbus(String base, Airbus airbus) {
+    public int actualizarAirbus(String base, Airbus airbus) {
         int bandera = 0;
         try {
             connMY = con.Conexion(base);
@@ -392,14 +398,14 @@ public int actualizarAirbus(String base, Airbus airbus) {
         return bandera;
     }
 
-public int eliminarAirbus(String base, Airbus objeto) {
+    public int eliminarAirbus(String base, Airbus objeto) {
         int bandera = 0;
         try {
             connMY = con.Conexion(base);
             connMY.setAutoCommit(false);
             CallableStatement prcProcedimientoAlmacenado = connMY.prepareCall(
                     "{ call eliminarAirbus(?,?) }");
-            prcProcedimientoAlmacenado.setLong(1,objeto.getId_airbus());
+            prcProcedimientoAlmacenado.setLong(1, objeto.getId_airbus());
             prcProcedimientoAlmacenado.setInt(2, 0);
             prcProcedimientoAlmacenado.registerOutParameter("bandera", Types.INTEGER);
             prcProcedimientoAlmacenado.execute();

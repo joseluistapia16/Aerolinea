@@ -60,7 +60,7 @@ public class ConsultaRuta extends GenericForwardComposer {
                 System.out.println(objeto.getRuta());
                 Window window = (Window) Executions.createComponents("/editarRuta.zul", null, parametro);
                 window.doModal();
-               
+
                 consuRuta.detach();
 
             }
@@ -81,34 +81,38 @@ public class ConsultaRuta extends GenericForwardComposer {
     }
 
     public void Tabla1b(String salida1, String destino1) {
+        
         if (salida1 == null) {
             salida1 = "";
         }
         if (destino1 == null) {
             destino1 = "";
         }
-           if (tabla.getRows() > 0) {
+        if("".equals(salida1) && "".equals(destino1)){
+            Tabla();
+        }else{
+        if (tabla.getRows() > 0) {
             tabla.getChildren().clear();
         }
-        lista = consu.filtrarRutas("lan_airlines", salida1, destino1);
+        lista = consu.listarRutas("lan_airlines", 1, salida.getValue(), destino.getValue());
         tabla.setRows(7);
 
         Listhead cabeza = new Listhead();
         Listheader ti = new Listheader("Id");
         ti.setAlign("center");
-       // ti.setWidth("40px");
+         ti.setWidth("40px");
         Listheader to = new Listheader("Rutas");
-        to.setWidth("120px");
+        to.setWidth("150px");
         to.setAlign("center");
         Listheader to1 = new Listheader("Salida");
-        to1.setWidth("120px");
+        to1.setWidth("220px");
         to1.setAlign("center");
         Listheader to2 = new Listheader("Destino");
-        to2.setWidth("110px");
+        to2.setWidth("220px");
         to2.setAlign("center");
         Listheader to3 = new Listheader("Duración");
         to3.setAlign("center");
-        //to3.setWidth("40px");
+        to3.setWidth("80px");
         tabla.appendChild(cabeza);
         for (int i = 0; i < lista.size(); i++) {
             Listitem item = new Listitem();
@@ -129,6 +133,7 @@ public class ConsultaRuta extends GenericForwardComposer {
             item.appendChild(cell4);
             tabla.appendChild(item);
         }
+        }  
     }
 
     public void Tabla() {
@@ -136,22 +141,24 @@ public class ConsultaRuta extends GenericForwardComposer {
             tabla.getChildren().clear();
         }
 
-        lista = consu.listarRutas("lan_airlines");
+        lista = consu.listarRutas("lan_airlines", 0, salida.getValue(), destino.getValue());
         tabla.setRows(7);
 
         Listhead cabeza = new Listhead();
         Listheader ti = new Listheader("Id");
+        ti.setWidth("40px");
         ti.setAlign("center");
         Listheader to = new Listheader("Rutas");
-        to.setWidth("120px");
+        to.setWidth("220px");
         to.setAlign("center");
         Listheader to1 = new Listheader("Salida");
-        to1.setWidth("120px");
+        to1.setWidth("220px");
         to1.setAlign("center");
         Listheader to2 = new Listheader("Destino");
-        to2.setWidth("110px");
+        to2.setWidth("220px");
         to2.setAlign("center");
         Listheader to3 = new Listheader("Duración");
+         to3.setWidth("80px");
         to3.setAlign("center");
 
         tabla.appendChild(cabeza);

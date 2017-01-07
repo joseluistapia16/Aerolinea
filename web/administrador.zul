@@ -53,6 +53,21 @@ Copyright (C) 2006 Potix Corporation. All Rights Reserved.
                     </menu>
                 </menupopup>
             </menu>
+            
+             <menu label="Clientes">
+                <menupopup>
+                        <menu label="Mantenimiento">
+                        <menupopup>    
+                            <menuitem id="cliente2" label="Edicion o Eliminación"/>                  
+                        </menupopup>
+                    </menu>
+                </menupopup>
+            </menu>
+              <menu label="Salir">
+                <menupopup>
+                        <menuitem id ="salir" label="Salir de Administrador" />
+                </menupopup>
+            </menu>
               
         </menubar>
     

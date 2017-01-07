@@ -1,6 +1,6 @@
 
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window id="conselprofe" title="Alumnos" border="normal" height="365px" width="505px"
+    <window id="conselprofe" title="Usuarios" border="normal" height="365px" width="505px"
             apply="com.aerolinea.controlador.vista.ConsultaCliente"
             position="center,center" closable="true"
             action="show: slideDown;hide: slideUp">

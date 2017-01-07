@@ -35,7 +35,7 @@ public class NuevoAirbus extends GenericForwardComposer {
     Button closeBtn, grabar;
     ArrayList<Airbus> listairbus = null;
     ArrayList<Long> idruta = new ArrayList<Long>();
-    ArrayList<com.aerolinea.dominio.Ruta> listaruta = consu.listarRutas("lan_airlines");
+    ArrayList<com.aerolinea.dominio.Ruta> listaruta = consu.listarRutas("lan_airlines", 0, "", "");
     ArrayList<FiltroHorarioRuta> listaHR = null;
     int posi;
 
@@ -63,6 +63,7 @@ public class NuevoAirbus extends GenericForwardComposer {
             numero.setDisabled(false);
             capacidad.setDisabled(false);
             grabar.setDisabled(false);
+            horarios.setValue("");
             llenarComboHorarioXRuta(listaruta.get(pos).getId_ruta());
             posi = pos;
         }
@@ -70,13 +71,14 @@ public class NuevoAirbus extends GenericForwardComposer {
 
     public void onChange$numero() {
         // System.out.println("Pinche ruta "+idruta.get(posi));
-        listairbus = consu.listarAirbus("lan_airlines",Long.parseLong("-1") , idruta.get(posi), numero.getValue(), 1);
-               System.out.println(" numero "+numero.getValue()+"  "+idruta.get(posi)+ " vemos "+ listairbus.size());
+        listairbus = consu.listarAirbus("lan_airlines", Long.parseLong("-1"), idruta.get(posi), numero.getValue(), 1);
+        System.out.println(" numero " + numero.getValue() + "  " + idruta.get(posi) + " vemos " + listairbus.size());
         if (listairbus.size() > 0) {
+              codigo.setText("LAN-" + numero.getText());
             Messagebox.show("AirBus y la ruta Ya Existe!!");
         } else {
             if (numero.getValue() < 1) {
-                codigo.setText("");
+             
             } else {
                 codigo.setText("LAN-" + numero.getText());
             }
@@ -84,13 +86,14 @@ public class NuevoAirbus extends GenericForwardComposer {
     }
 
     public void onClick$grabar() {
-        System.out.println(" numero "+numero.getValue()+" grabar Pinche ruta "+idruta.get(posi));
+        System.out.println(" numero " + numero.getValue() + " grabar Pinche ruta " + idruta.get(posi));
         listairbus = consu.listarAirbus("lan_airlines", Long.parseLong("-1"), idruta.get(posi), numero.getValue(), 1);
         if (listairbus.size() > 0) {
             Messagebox.show("AirBus y la ruta Ya Existe!!");
-        } else { 
-                record();
-             
+        } else {
+            codigo.setText("LAN-" + numero.getText());
+            record();
+
         }
     }
 

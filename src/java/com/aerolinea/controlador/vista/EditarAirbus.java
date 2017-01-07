@@ -39,7 +39,7 @@ public class EditarAirbus extends GenericForwardComposer {
     Button closeBtn, grabar, eliminar;
     ArrayList<Airbus> listairbus = null;
     ArrayList<Long> idruta = new ArrayList<Long>();
-    ArrayList<com.aerolinea.dominio.Ruta> listaruta = consu.listarRutas("lan_airlines");
+    ArrayList<com.aerolinea.dominio.Ruta> listaruta = consu.listarRutas("lan_airlines",0,"","");
     Map<String, FiltroAirbusRutas> parametro = new HashMap<String, FiltroAirbusRutas>();
     ArrayList<FiltroHorarioRuta> listaHR = null;
     int posi;

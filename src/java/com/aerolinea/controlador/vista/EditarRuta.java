@@ -42,7 +42,6 @@ public class EditarRuta extends GenericForwardComposer {
             Object key = it.next();
             objeto = (com.aerolinea.dominio.Ruta) arg.get(key);
             dialog = (Window) arg.get("PARENT_WINDOW");
-            System.out.println(" hola " + objeto.getRuta());
             ruta.setValue(objeto.getRuta());
             partida.setValue(objeto.getPartida());
             destino.setValue(objeto.getDestino());
@@ -68,7 +67,7 @@ public class EditarRuta extends GenericForwardComposer {
     }
     
     public void onClick$grabar() {
-        ArrayList<com.aerolinea.dominio.Ruta> lista = consu.filtrarRutas("lan_airlines", partida.getText(), destino.getText());
+        ArrayList<com.aerolinea.dominio.Ruta> lista = consu.listarRutas("lan_airlines", 1,partida.getText(), destino.getText());
         System.out.println(" lista " + lista.size());
         if (lista.size() < 1 || (lista.size() == 1 && lista.get(0).getId_ruta() == objeto.getId_ruta())) {
             record();

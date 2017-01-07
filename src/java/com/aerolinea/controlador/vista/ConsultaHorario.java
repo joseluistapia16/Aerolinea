@@ -93,7 +93,7 @@ public class ConsultaHorario extends GenericForwardComposer {
             if (tabla.getRows() > 0) {
                 tabla.getChildren().clear();
             }
-            lista = consu.filtrarHorarioRuta("lan_airlines", salida1, destino1);
+            lista = consu.filtrarHorarioRuta("lan_airlines",1, salida1, destino1);
             tabla.setRows(7);
 
             Listhead cabeza = new Listhead();
@@ -134,7 +134,7 @@ public class ConsultaHorario extends GenericForwardComposer {
             tabla.getChildren().clear();
         }
 
-        lista = consu.filtrarHorarioRuta("lan_airlines");
+        lista = consu.filtrarHorarioRuta("lan_airlines",0, "", "");
         tabla.setRows(7);
         Listhead cabeza = new Listhead();
         Listheader to = new Listheader("Rutas");

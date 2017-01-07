@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+index.zul
+
+{{IS_NOTE
+	Purpose:
+		
+	Description:
+		
+	History:
+		Mon Jun 12 21:23:35     2006, Created by tomyeh
+		Fri May 01 04:36:35     2009, Modified by stera
+}}IS_NOTE
+
+Copyright (C) 2006 Potix Corporation. All Rights Reserved.
+
+{{IS_RIGHT
+}}IS_RIGHT
+-->
+<window id="usuario1" apply="com.aerolinea.controlador.vista.Usuario1"
+> 
+<div>
+    <style src="/style.css" />
+    <menubar autodrop="true" >
+         <menu label="Perfil">
+                <menupopup>
+                            <menuitem id ="ruta00" label="Revisar"/>                                                                                                                   
+                </menupopup>
+            </menu>  
+            <menu label="Reservaciones">
+                <menupopup>
+                    <menu label="Mantenimiento">
+                        <menupopup>
+                            <menuitem id ="ruta0" label="Ingreso"/>             
+                            <menuitem id ="ruta1" label="Edicion o Eliminación"/>                                                       
+                        </menupopup>
+                    </menu>
+                </menupopup>
+            </menu>          
+              <menu label="Salir">
+                <menupopup>
+                        <menuitem id ="salir" label="Salir de Administrador" />
+                </menupopup>
+            </menu>
+              
+        </menubar>
+    
+  
+</div>
+</window>

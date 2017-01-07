@@ -44,7 +44,7 @@ public class Ruta extends GenericForwardComposer {
     }
 
     public void onClick$grabar() {
-        ArrayList<com.aerolinea.dominio.Ruta> lista = consu.filtrarRutas("lan_airlines", partida.getText(), destino.getText());
+        ArrayList<com.aerolinea.dominio.Ruta> lista = consu.listarRutas("lan_airlines",2, partida.getText(), destino.getText());
         System.out.println(" lista " + lista.size());
         if (lista.size() < 1) {
             record();

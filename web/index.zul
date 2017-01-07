@@ -30,9 +30,9 @@ Copyright (C) 2006 Potix Corporation. All Rights Reserved.
             </div> 
         </div> 
         <space height="30px"/> 
-        <div align="left"  >             
+        <div   >             
             <button id="registro" label="Registrarse" width="130px"   height="40px" style="align=center; 
-    color: #008000;background-color: #008000; margin-left:1200px;  display: inline-block;font-size: 17.50px;
+    color: #008000;background-color: #008000; margin-left:1000px;  display: inline-block;font-size: 17.50px;
     zoom: 2;    *display: inline;vertical-align: baseline;cursor: pointer;"/>        
         </div>
         <space height="40px"/>

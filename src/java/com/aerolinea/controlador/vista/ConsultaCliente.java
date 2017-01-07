@@ -52,9 +52,9 @@ public class ConsultaCliente extends GenericForwardComposer {
             if (lista.size() > 0) {
                 int id = tabla.getSelectedIndex();
                 Usuario objeto = lista.get(id);
-                parametro.put("clientes", objeto);
+                parametro.put("objeto", objeto);
                 System.out.println(" objeto " + objeto.getNombreusuario() + " " + id);
-                Window window = (Window) Executions.createComponents("/edicionClientes.zul", null, parametro);
+                Window window = (Window) Executions.createComponents("/editarClientes.zul", null, parametro);
                 window.doModal();
                 conselprofe.detach();
             }
@@ -87,7 +87,7 @@ public class ConsultaCliente extends GenericForwardComposer {
         to.setWidth("80px");
         to.setAlign("center");
         Listheader to1 = new Listheader("Nombre");
-        to1.setWidth("180px");
+//        to1.setWidth("180px");
         to1.setAlign("center");
         tabla.appendChild(cabeza);
         for (int i = 0; i < lista.size(); i++) {
@@ -108,14 +108,14 @@ public class ConsultaCliente extends GenericForwardComposer {
             tabla.getChildren().clear();
         }
 
-        lista = consu.filtrarClientes("lan_airlines", filtro.getValue(), 1);
+        lista = consu.filtrarClientes("lan_airlines", filtro.getValue(), 0);
         tabla.setRows(7);
         Listhead cabeza = new Listhead();
         Listheader to = new Listheader("Cedula");
         to.setWidth("80px");
         to.setAlign("center");
         Listheader to1 = new Listheader("Nombre");
-        to1.setWidth("180px");
+//        to1.setWidth("180px");
         to1.setAlign("center");
         tabla.appendChild(cabeza);
         for (int i = 0; i < lista.size(); i++) {

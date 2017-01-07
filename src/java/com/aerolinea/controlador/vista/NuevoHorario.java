@@ -31,7 +31,7 @@ public class NuevoHorario extends GenericForwardComposer {
     Window Nhorario;
     Button closeBtn, grabar;
     int posi = 0;
-    ArrayList<com.aerolinea.dominio.Ruta> lista = consu.listarRutas("lan_airlines");
+    ArrayList<com.aerolinea.dominio.Ruta> lista = consu.listarRutas("lan_airlines",0,"","");
     ArrayList<Long> idruta = new ArrayList<Long>();
     //////////////////////
     Horario objeto = new Horario();

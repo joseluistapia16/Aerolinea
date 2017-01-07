@@ -14,10 +14,10 @@
             <listbox id="tabla"  rows="7">
                 <listhead id="cabecera">
                   
-                    <listheader label="Id" align="center"  />
+                    <listheader label="Id" align="center" width="20px"  />
                     <listheader label="Ruta" align="center" width="120px" />  
-                    <listheader label="Salida" align="center" width="120px" />   
-                    <listheader label="Destino" align="center" width="110px" />  
+                    <listheader label="Salida" align="center" width="170px" />   
+                    <listheader label="Destino" align="center" width="170px" />  
                     <listheader label="Duración" align="center"  />   
                 </listhead>        
             </listbox>

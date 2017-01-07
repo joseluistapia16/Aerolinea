@@ -26,20 +26,29 @@ public class Archivo {
     }
 
     public static String leerArchivo(String archivo1) {
-
+int op=0;
         String text = "";
         try {
             String texto = " ";
             FileReader lector = new FileReader(archivo1 + ".clv");
             BufferedReader contenido = new BufferedReader(lector);
             while ((texto = contenido.readLine()) != null) {
-                text = text +texto+"\n";              
+                if(!" ".equals(texto)){
+                text = text +texto+"\n";  
+                 op++;
+                  System.out.println(" conta "+op);
+                } 
             }
         } catch (IOException e) {
             System.out.println("Error al leer " );
         }
-       
-        return text;
+        String mm="";
+        for (int i = 0; i < text.length()-1; i++) {
+            mm= mm +text.charAt(i);
+          // System.out.print(text.charAt(i)+ " - "+(i+1));
+             
+        }
+        return mm;
     }
 
 }
